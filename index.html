@@ -6,7 +6,9 @@
   <title>Jaciara Baby & Kids</title>
   <meta name="description" content="Jaciara Baby & Kids - Loja infantil com produtos para passeio, móveis, kit berço, roupas, alimentação e brinquedos.">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-y8d5A+ZkC+Kb9lMCgIO9F/Nph9zFxakciJZrrzCacF5eTjGjF3Qs3VvL5PGkhUlQXk2GqGb3FT70Px3bExZmOw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css">
   <style>
     * {
       margin: 0;
@@ -20,12 +22,13 @@
     }
     header {
       background: #ffffff;
-      padding: 10px 20px;
+      padding: 10px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 4px solid #F4A72B;
       flex-wrap: wrap;
+      width: 100%;
     }
     .logo {
       height: 60px;
@@ -34,6 +37,10 @@
       display: flex;
       align-items: center;
       gap: 16px;
+      flex-grow: 1;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 20px;
     }
     nav {
       display: flex;
@@ -44,7 +51,10 @@
       text-decoration: none;
       color: #7B3FA2;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 16px;
+      
+      
+    
     }
     nav a:hover {
       color: #EF5FA2;
@@ -188,6 +198,20 @@
       background: #FDE6F2;
       color: #7B3FA2;
     }
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 1001;
+    }
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
@@ -201,13 +225,13 @@
     <img src="logo-jaciara.png" alt="Logo da Jaciara Baby & Kids" class="logo">
     <div class="nav-container">
       <nav aria-label="Navegação principal">
-        <a href="#">Passeio</a>
-        <a href="#">Móveis</a>
-        <a href="#">Kit Berço</a>
-        <a href="#">Roupas</a>
-        <a href="#">Alimentação</a>
-        <a href="#">Brinquedos</a>
-        <a href="#">Ofertas</a>
+        <a href="passeio.html">Passeio</a>
+        <a href="moveis.html">Móveis</a>
+        <a href="kit-berco.html">Kit Berço</a>
+        <a href="roupas.html">Roupas</a>
+        <a href="alimentacao.html">Alimentação</a>
+        <a href="brinquedos.html">Brinquedos</a>
+        <a href="ofertas.html">Ofertas</a>
       </nav>
       <i class="fas fa-shopping-cart cart-icon" title="Carrinho de Compras" onclick="document.querySelector('.cart-modal').style.display='flex'"></i>
     </div>
@@ -224,7 +248,7 @@
   <section class="banner">
     <h1>Novidades Jaciara Baby & Kids</h1>
     <p>Venha conferir a nova coleção Pituchinhus!</p>
-    <a href="#destaques"><button>Clica aqui e confira</button></a>
+    <a href="pagina2.html"><button>Clica aqui e confira</button></a>
   </section>
 
   <section class="categorias">
@@ -258,11 +282,11 @@
     <h2>Produtos em Destaque</h2>
     <div class="produtos">
       <div class="produto">
-        <img src="/mnt/data/Captura de Tela (8).png" alt="Produto em destaque 1">
+        <img src="https://via.placeholder.com/160x160?text=Produto+1" alt="Produto em destaque 1">
         <p>Conjunto Rosa Floral</p>
       </div>
       <div class="produto">
-        <img src="/mnt/data/Captura de Tela (9).png" alt="Produto em destaque 2">
+        <img src="https://via.placeholder.com/160x160?text=Produto+2" alt="Produto em destaque 2">
         <p>Macacão Azul Bebê</p>
       </div>
     </div>
@@ -278,6 +302,10 @@
     Projeto de exemplo para a loja Jaciara Baby & Kids.<br> Todos os direitos reservados.
   </footer>
 
+  <a href="https://wa.me/5583996138889" class="whatsapp-button" target="_blank" title="Fale conosco no WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
   <script>
     let index = 0;
     const slides = document.querySelectorAll('.carrossel img');
@@ -289,3 +317,4 @@
   </script>
 </body>
 </html>
+
