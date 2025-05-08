@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jaciara Baby & Kids</title>
+  <meta name="description" content="Jaciara Baby & Kids - Loja infantil com produtos para passeio, móveis, kit berço, roupas, alimentação e brinquedos.">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-y8d5A+ZkC+Kb9lMCgIO9F/Nph9zFxakciJZrrzCacF5eTjGjF3Qs3VvL5PGkhUlQXk2GqGb3FT70Px3bExZmOw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Fredoka', sans-serif;
+    }
+    body {
+      background: #fffaf5;
+      color: #7B3FA2;
+    }
+    header {
+      background: #ffffff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 4px solid #F4A72B;
+      flex-wrap: wrap;
+    }
+    .logo {
+      height: 60px;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #7B3FA2;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    nav a:hover {
+      color: #EF5FA2;
+    }
+    .cart-icon {
+      font-size: 20px;
+      color: #7B3FA2;
+      cursor: pointer;
+    }
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .cart-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 300px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .cart-content h3 {
+      margin-bottom: 10px;
+      color: #7B3FA2;
+    }
+    .close-cart {
+      margin-top: 20px;
+      background: #EF5FA2;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .banner {
+      background: linear-gradient(90deg, #5ED4EA 0%, #EF5FA2 100%);
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .banner h1 {
+      color: white;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .banner p {
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .banner a button {
+      background: #F4A72B;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background 0.3s;
+    }
+    .banner a button:hover {
+      background: #EF5FA2;
+    }
+    .categorias {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      background: #D1F0F7;
+      padding: 30px 10px;
+    }
+    .categoria {
+      text-align: center;
+      max-width: 100px;
+    }
+    .categoria img {
+      width: 60px;
+      margin-bottom: 8px;
+    }
+    .categoria span {
+      font-size: 13px;
+      color: #7B3FA2;
+    }
+    .produtos-destaque {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .produtos-destaque h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #EF5FA2;
+    }
+    .produtos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .produto {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      padding: 10px;
+      width: 160px;
+    }
+    .produto img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .produto p {
+      font-size: 14px;
+      margin-top: 8px;
+      color: #7B3FA2;
+    }
+    .carrossel {
+      margin: 40px auto;
+      max-width: 300px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .carrossel img {
+      width: 100%;
+      display: none;
+    }
+    .carrossel img.ativo {
+      display: block;
+    }
+    footer {
+      text-align: center;
+      font-size: 12px;
+      padding: 20px;
+      background: #FDE6F2;
+      color: #7B3FA2;
+    }
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo-jaciara.png" alt="Logo da Jaciara Baby & Kids" class="logo">
+    <div class="nav-container">
+      <nav aria-label="Navegação principal">
+        <a href="#">Passeio</a>
+        <a href="#">Móveis</a>
+        <a href="#">Kit Berço</a>
+        <a href="#">Roupas</a>
+        <a href="#">Alimentação</a>
+        <a href="#">Brinquedos</a>
+        <a href="#">Ofertas</a>
+      </nav>
+      <i class="fas fa-shopping-cart cart-icon" title="Carrinho de Compras" onclick="document.querySelector('.cart-modal').style.display='flex'"></i>
+    </div>
+  </header>
+
+  <div class="cart-modal">
+    <div class="cart-content">
+      <h3>Seu carrinho está vazio!</h3>
+      <p>Adicione produtos para visualizar aqui.</p>
+      <button class="close-cart" onclick="document.querySelector('.cart-modal').style.display='none'">Fechar</button>
+    </div>
+  </div>
+
+  <section class="banner">
+    <h1>Novidades Jaciara Baby & Kids</h1>
+    <p>Venha conferir a nova coleção Pituchinhus!</p>
+    <a href="#destaques"><button>Clica aqui e confira</button></a>
+  </section>
+
+  <section class="categorias">
+    <div class="categoria">
+      <img src="https://via.placeholder.com/60" alt="Carrinho de bebê">
+      <span>Passeio</span>
+    </div>
+    <div class="categoria">
+      <img src="https://via.placeholder.com/60" alt="Berço infantil">
+      <span>Móveis</span>
+    </div>
+    <div class="categoria">
+      <img src="https://via.placeholder.com/60" alt="Kit berço completo">
+      <span>Kit Berço</span>
+    </div>
+    <div class="categoria">
+      <img src="https://via.placeholder.com/60" alt="Roupas infantis">
+      <span>Roupas</span>
+    </div>
+    <div class="categoria">
+      <img src="https://via.placeholder.com/60" alt="Alimentação do bebê">
+      <span>Alimentação</span>
+    </div>
+    <div class="categoria">
+      <img src="https://via.placeholder.com/60" alt="Brinquedos para crianças">
+      <span>Brinquedos</span>
+    </div>
+  </section>
+
+  <section class="produtos-destaque" id="destaques">
+    <h2>Produtos em Destaque</h2>
+    <div class="produtos">
+      <div class="produto">
+        <img src="/mnt/data/Captura de Tela (8).png" alt="Produto em destaque 1">
+        <p>Conjunto Rosa Floral</p>
+      </div>
+      <div class="produto">
+        <img src="/mnt/data/Captura de Tela (9).png" alt="Produto em destaque 2">
+        <p>Macacão Azul Bebê</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="carrossel">
+    <img src="https://via.placeholder.com/300x200/EF5FA2/ffffff?text=Promoção+1" class="ativo" alt="Promoção 1">
+    <img src="https://via.placeholder.com/300x200/F4A72B/ffffff?text=Promoção+2" alt="Promoção 2">
+    <img src="https://via.placeholder.com/300x200/7B3FA2/ffffff?text=Promoção+3" alt="Promoção 3">
+  </div>
+
+  <footer>
+    Projeto de exemplo para a loja Jaciara Baby & Kids.<br> Todos os direitos reservados.
+  </footer>
+
+  <script>
+    let index = 0;
+    const slides = document.querySelectorAll('.carrossel img');
+    setInterval(() => {
+      slides[index].classList.remove('ativo');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('ativo');
+    }, 3000);
+  </script>
+</body>
+</html>
