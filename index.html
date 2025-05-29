@@ -4,316 +4,174 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jaciara Baby & Kids</title>
-  <meta name="description" content="Jaciara Baby & Kids - Loja infantil com produtos para passeio, móveis, kit berço, roupas, alimentação e brinquedos.">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Fredoka', sans-serif;
-    }
-    body {
-      background: #fffaf5;
-      color: #7B3FA2;
-    }
-    header {
-      background: #ffffff;
-      padding: 10px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 4px solid #F4A72B;
-      flex-wrap: wrap;
-      width: 100%;
-    }
-    .logo {
-      height: 60px;
-    }
-    .nav-container {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-grow: 1;
-      justify-content: space-between;
-      width: 100%;
-      padding: 0 20px;
-    }
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    nav a {
-      text-decoration: none;
-      color: #7B3FA2;
-      font-weight: 600;
-      font-size: 16px;
-      
-      
-    
-    }
-    nav a:hover {
-      color: #EF5FA2;
-    }
-    .cart-icon {
-      font-size: 20px;
-      color: #7B3FA2;
-      cursor: pointer;
-    }
-    .cart-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .cart-content {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      max-width: 300px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    .cart-content h3 {
-      margin-bottom: 10px;
-      color: #7B3FA2;
-    }
-    .close-cart {
-      margin-top: 20px;
-      background: #EF5FA2;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .banner {
-      background: linear-gradient(90deg, #5ED4EA 0%, #EF5FA2 100%);
-      text-align: center;
-      padding: 40px 20px;
-    }
-    .banner h1 {
-      color: white;
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-    .banner p {
-      font-size: 18px;
-      color: #fff;
-      margin-bottom: 20px;
-    }
-    .banner a button {
-      background: #F4A72B;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: background 0.3s;
-    }
-    .banner a button:hover {
-      background: #EF5FA2;
-    }
-    .categorias {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      background: #D1F0F7;
-      padding: 30px 10px;
-    }
-    .categoria {
-      text-align: center;
-      max-width: 100px;
-    }
-    .categoria img {
-      width: 60px;
-      margin-bottom: 8px;
-    }
-    .categoria span {
-      font-size: 13px;
-      color: #7B3FA2;
-    }
-    .produtos-destaque {
-      padding: 40px 20px;
-      text-align: center;
-    }
-    .produtos-destaque h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      color: #EF5FA2;
-    }
-    .produtos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-    .produto {
-      background: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      padding: 10px;
-      width: 160px;
-    }
-    .produto img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    .produto p {
-      font-size: 14px;
-      margin-top: 8px;
-      color: #7B3FA2;
-    }
-    .carrossel {
-      margin: 40px auto;
-      max-width: 300px;
-      overflow: hidden;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .carrossel img {
-      width: 100%;
-      display: none;
-    }
-    .carrossel img.ativo {
-      display: block;
-    }
-    footer {
-      text-align: center;
-      font-size: 12px;
-      padding: 20px;
-      background: #FDE6F2;
-      color: #7B3FA2;
-    }
-    .whatsapp-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25D366;
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      border-radius: 50%;
-      font-size: 24px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      cursor: pointer;
-      z-index: 1001;
-    }
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Fredoka',sans-serif; }
+    body { background:#fffaf5; color:#6A2E98; }
+    header { background:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #F99F38; }
+    .logo { height:60px; }
+    nav { display:flex; gap:16px; }
+    nav a { text-decoration:none; color:#6A2E98; font-weight:600; font-size:14px; }
+
+    .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:1000; }
+    .modal.open { display:flex; }
+    .modal-content { background:#fefefe; padding:20px; border-radius:8px; max-width:500px; width:90%; position:relative; }
+    .close { position:absolute; top:10px; right:15px; font-size:28px; font-weight:bold; cursor:pointer; color:#aaa; }
+    .close:hover { color:#000; }
+    .modal-content input, .modal-content select, .modal-content textarea, .modal-content button { width:100%; margin:8px 0; padding:8px; }
+
+    .banner { background:linear-gradient(90deg,#F99F38 0%,#EC74A7 100%); text-align:center; padding:40px 20px; }
+    .banner h1 { color:#fff; font-size:32px; margin-bottom:10px; }
+    .banner p { color:#fff; font-size:18px; margin-bottom:20px; }
+    .banner button { background:#F99F38; color:#fff; border:none; padding:10px 20px; border-radius:30px; font-size:16px; cursor:pointer; box-shadow:0 4px 6px rgba(0,0,0,0.1); }
+
+    .categorias { display:flex; flex-wrap:wrap; justify-content:center; gap:40px; background:#D1F0F7; padding:30px 10px; }
+    .categoria { text-align:center; max-width:100px; }
+    .categoria .icon-circle { width:60px; height:60px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin:0 auto 8px; }
+    .categoria .icon-circle i { font-size:24px; color:#EC74A7; }
+    .categoria span { font-size:13px; color:#6A2E98; }
+
+    .produtos { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; padding:30px 10px; }
+    .produto-card { background:#fff; border:1px solid #ddd; border-radius:8px; padding:16px; text-align:center; }
+    .produto-card img { max-width:100%; border-radius:4px; }
+    .produto-card h3 { font-size:18px; color:#6A2E98; margin:10px 0 5px; }
+    .produto-card p { font-size:14px; margin:5px 0; }
+    .produto-card .price { font-weight:bold; margin-top:8px; }
+    .produto-card .delete-btn { background:transparent; border:none; color:#E74C3C; cursor:pointer; margin-top:8px; }
+
+    footer { text-align:center; font-size:12px; padding:20px; background:#FDE6F2; color:#6A2E98; }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo-jaciara.png" alt="Logo da Jaciara Baby & Kids" class="logo">
-    <div class="nav-container">
-      <nav aria-label="Navegação principal">
-        <a href="passeio.html">Passeio</a>
-        <a href="moveis.html">Móveis</a>
-        <a href="kit-berco.html">Kit Berço</a>
-        <a href="roupas.html">Roupas</a>
-        <a href="alimentacao.html">Alimentação</a>
-        <a href="brinquedos.html">Brinquedos</a>
-        <a href="ofertas.html">Ofertas</a>
-      </nav>
-      <i class="fas fa-shopping-cart cart-icon" title="Carrinho de Compras" onclick="document.querySelector('.cart-modal').style.display='flex'"></i>
-    </div>
+    <img src="logo-jaciara.png" alt="Jaciara Baby & Kids" class="logo">
+    <nav>
+      <a href="passeio.html">Passeio</a>
+      <a href="moveis.html">Móveis</a>
+      <a href="kit-berco.html">Kit Berço</a>
+      <a href="roupas.html">Roupas</a>
+      <a href="alimentacao.html">Alimentação</a>
+      <a href="brinquedos.html">Brinquedos</a>
+      <a href="ofertas.html">Ofertas</a>
+      <a href="#" id="admin-link">Admin</a>
+    </nav>
   </header>
 
-  <div class="cart-modal">
-    <div class="cart-content">
-      <h3>Seu carrinho está vazio!</h3>
-      <p>Adicione produtos para visualizar aqui.</p>
-      <button class="close-cart" onclick="document.querySelector('.cart-modal').style.display='none'">Fechar</button>
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-close="login-modal">&times;</span>
+      <h2>Login Admin</h2>
+      <input id="username" placeholder="Usuário">
+      <input id="password" type="password" placeholder="Senha">
+      <button id="login-btn">Entrar</button>
+    </div>
+  </div>
+  <!-- Admin Panel -->
+  <div id="admin-panel" class="modal">
+    <div class="modal-content">
+      <span class="close" data-close="admin-panel">&times;</span>
+      <h2>Painel Admin</h2>
+      <div>
+        <h3>Adicionar Categoria</h3>
+        <input id="cat-name" placeholder="Nome da Categoria">
+        <input id="cat-img" placeholder="URL da Imagem">
+        <button id="add-cat">Adicionar Categoria</button>
+      </div>
+      <hr>
+      <div>
+        <h3>Adicionar Produto</h3>
+        <input id="prod-name" placeholder="Nome do Produto">
+        <input id="prod-img" placeholder="URL da Imagem">
+        <input id="prod-price" placeholder="Preço (ex: 99.90)">
+        <textarea id="prod-desc" rows="3" placeholder="Descrição"></textarea>
+        <select id="prod-cat"></select>
+        <button id="add-prod">Adicionar Produto</button>
+      </div>
     </div>
   </div>
 
   <section class="banner">
     <h1>Novidades Jaciara Baby & Kids</h1>
     <p>Venha conferir a nova coleção Pituchinhus!</p>
-    <a href="pagina2.html"><button>Clica aqui e confira</button></a>
+    <button>Clica aqui e confira</button>
   </section>
 
-  <section class="categorias">
-    <div class="categoria">
-      <img src="https://via.placeholder.com/60" alt="Carrinho de bebê">
-      <span>Passeio</span>
-    </div>
-    <div class="categoria">
-      <img src="https://via.placeholder.com/60" alt="Berço infantil">
-      <span>Móveis</span>
-    </div>
-    <div class="categoria">
-      <img src="https://via.placeholder.com/60" alt="Kit berço completo">
-      <span>Kit Berço</span>
-    </div>
-    <div class="categoria">
-      <img src="https://via.placeholder.com/60" alt="Roupas infantis">
-      <span>Roupas</span>
-    </div>
-    <div class="categoria">
-      <img src="https://via.placeholder.com/60" alt="Alimentação do bebê">
-      <span>Alimentação</span>
-    </div>
-    <div class="categoria">
-      <img src="https://via.placeholder.com/60" alt="Brinquedos para crianças">
-      <span>Brinquedos</span>
-    </div>
-  </section>
-
-  <section class="produtos-destaque" id="destaques">
-    <h2>Produtos em Destaque</h2>
-    <div class="produtos">
-      <div class="produto">
-        <img src="https://via.placeholder.com/160x160?text=Produto+1" alt="Produto em destaque 1">
-        <p>Conjunto Rosa Floral</p>
-      </div>
-      <div class="produto">
-        <img src="https://via.placeholder.com/160x160?text=Produto+2" alt="Produto em destaque 2">
-        <p>Macacão Azul Bebê</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="carrossel">
-    <img src="https://via.placeholder.com/300x200/EF5FA2/ffffff?text=Promoção+1" class="ativo" alt="Promoção 1">
-    <img src="https://via.placeholder.com/300x200/F4A72B/ffffff?text=Promoção+2" alt="Promoção 2">
-    <img src="https://via.placeholder.com/300x200/7B3FA2/ffffff?text=Promoção+3" alt="Promoção 3">
-  </div>
+  <section class="categorias" id="categorias-container"></section>
+  <section class="produtos" id="produtos-container"></section>
 
   <footer>
     Projeto de exemplo para a loja Jaciara Baby & Kids.<br> Todos os direitos reservados.
   </footer>
 
-  <a href="https://wa.me/5583996138889" class="whatsapp-button" target="_blank" title="Fale conosco no WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-
   <script>
-    let index = 0;
-    const slides = document.querySelectorAll('.carrossel img');
-    setInterval(() => {
-      slides[index].classList.remove('ativo');
-      index = (index + 1) % slides.length;
-      slides[index].classList.add('ativo');
-    }, 3000);
+    const iconMap = {
+      'Passeio': 'fas fa-baby-carriage',
+      'Móveis': 'fas fa-bed',
+      'Kit Berço': 'fas fa-box-open',
+      'Roupas': 'fas fa-tshirt',
+      'Alimentação': 'fas fa-utensils',
+      'Brinquedos': 'fas fa-gamepad'
+    };
+    let categories = JSON.parse(localStorage.getItem('categories')) || [
+      { name:'Passeio' },{ name:'Móveis' },{ name:'Kit Berço' },{ name:'Roupas' },{ name:'Alimentação' },{ name:'Brinquedos' }
+    ];
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+
+    function renderCategories() {
+      const container = document.getElementById('categorias-container');
+      container.innerHTML = '';
+      categories.forEach(cat => {
+        const div = document.createElement('div'); div.className = 'categoria';
+        const iconClass = iconMap[cat.name] || 'fas fa-star';
+        div.innerHTML = `<div class="icon-circle"><i class="${iconClass}"></i></div><span>${cat.name}</span>`;
+        container.appendChild(div);
+      });
+      populateCategorySelect();
+    }
+    function renderProducts() {
+      const container = document.getElementById('produtos-container'); container.innerHTML = '';
+      products.forEach((p,i) => {
+        const card = document.createElement('div'); card.className = 'produto-card';
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <div class="price">R$ ${parseFloat(p.price).toFixed(2)}</div>
+          <button class="delete-btn" data-index="${i}">Excluir</button>`;
+        container.appendChild(card);
+      });
+      document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', () => {
+        products.splice(btn.dataset.index,1); localStorage.setItem('products',JSON.stringify(products)); renderProducts();
+      }));
+    }
+    function populateCategorySelect() {
+      const sel = document.getElementById('prod-cat'); sel.innerHTML='';
+      categories.forEach(cat => sel.innerHTML+=`<option value="${cat.name}">${cat.name}</option>`);
+    }
+    renderCategories(); renderProducts();
+
+    function openModal(id){ document.getElementById(id).classList.add('open'); }
+    function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+    document.getElementById('admin-link').addEventListener('click', e=>{ e.preventDefault(); openModal('login-modal'); });
+    document.querySelectorAll('.close').forEach(btn=>btn.addEventListener('click',()=>closeModal(btn.dataset.close)));
+    document.getElementById('login-btn').addEventListener('click',()=>{
+      const user=document.getElementById('username').value; const pass=document.getElementById('password').value;
+      if(user==='admin'&&pass==='senha123'){ closeModal('login-modal'); openModal('admin-panel'); }
+      else alert('Credenciais inválidas');
+    });
+    document.getElementById('add-cat').addEventListener('click',()=>{
+      const name=document.getElementById('cat-name').value.trim(); if(name){ categories.push({name}); localStorage.setItem('categories',JSON.stringify(categories)); renderCategories(); }
+      else alert('Preencha o nome da categoria');
+    });
+    document.getElementById('add-prod').addEventListener('click',()=>{
+      const n=document.getElementById('prod-name').value.trim(), i=document.getElementById('prod-img').value.trim(),
+            p=document.getElementById('prod-price').value.trim(), d=document.getElementById('prod-desc').value.trim();
+      if(n&&i&&p&&d){ products.push({name:n,img:i,price:p,desc:d}); localStorage.setItem('products',JSON.stringify(products)); renderProducts(); }
+      else alert('Preencha todos os campos de produto');
+    });
+    window.addEventListener('click',e=>{ if(e.target.classList.contains('modal')) closeModal(e.target.id); });
   </script>
 </body>
 </html>
