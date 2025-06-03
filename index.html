@@ -11,35 +11,69 @@
     body { background:#fffaf5; color:#6A2E98; }
     header { background:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #F99F38; }
     .logo { height:60px; }
-    nav { display:flex; gap:16px; }
-    nav a { text-decoration:none; color:#6A2E98; font-weight:600; font-size:14px; }
+    nav { display:flex; gap:16px; align-items:center; }
+    nav a { text-decoration:none; color:#6A2E98; font-weight:600; font-size:14px; cursor:pointer; }
+    .cart-icon { font-size:20px; color:#6A2E98; cursor:pointer; margin-left:16px; }
 
-    .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:1000; }
-    .modal.open { display:flex; }
-    .modal-content { background:#fefefe; padding:20px; border-radius:8px; max-width:500px; width:90%; position:relative; }
-    .close { position:absolute; top:10px; right:15px; font-size:28px; font-weight:bold; cursor:pointer; color:#aaa; }
-    .close:hover { color:#000; }
-    .modal-content input, .modal-content select, .modal-content textarea, .modal-content button { width:100%; margin:8px 0; padding:8px; }
-
+    /* Banner */
     .banner { background:linear-gradient(90deg,#F99F38 0%,#EC74A7 100%); text-align:center; padding:40px 20px; }
     .banner h1 { color:#fff; font-size:32px; margin-bottom:10px; }
     .banner p { color:#fff; font-size:18px; margin-bottom:20px; }
     .banner button { background:#F99F38; color:#fff; border:none; padding:10px 20px; border-radius:30px; font-size:16px; cursor:pointer; box-shadow:0 4px 6px rgba(0,0,0,0.1); }
 
-    .categorias { display:flex; flex-wrap:wrap; justify-content:center; gap:40px; background:#D1F0F7; padding:30px 10px; }
-    .categoria { text-align:center; max-width:100px; }
-    .categoria .icon-circle { width:60px; height:60px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin:0 auto 8px; }
-    .categoria .icon-circle i { font-size:24px; color:#EC74A7; }
-    .categoria span { font-size:13px; color:#6A2E98; }
+    /* Carousel of category icons */
+    .carousel-icons { background:#D1F0F7; overflow:hidden; padding:20px 0; }
+    .carousel-inner { display:flex; transition:transform 0.5s ease-in-out; }
+    .carousel-item { flex:0 0 20%; text-align:center; }
+    .carousel-item .icon-circle { width:60px; height:60px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin:0 auto 8px; }
+    .carousel-item .icon-circle i { font-size:24px; color:#EC74A7; }
+    .carousel-item span { font-size:13px; color:#6A2E98; display:block; }
 
-    .produtos { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; padding:30px 10px; }
-    .produto-card { background:#fff; border:1px solid #ddd; border-radius:8px; padding:16px; text-align:center; }
-    .produto-card img { max-width:100%; border-radius:4px; }
-    .produto-card h3 { font-size:18px; color:#6A2E98; margin:10px 0 5px; }
-    .produto-card p { font-size:14px; margin:5px 0; }
-    .produto-card .price { font-weight:bold; margin-top:8px; }
-    .produto-card .delete-btn { background:transparent; border:none; color:#E74C3C; cursor:pointer; margin-top:8px; }
+    /* Sections Titles */
+    .section-title { font-size:24px; color:#EF5FA2; text-align:center; margin:30px 0 10px; }
 
+    /* Slider Section */
+    .slider-section { position:relative; padding:0 40px; margin-bottom:40px; }
+    .slider-container { overflow:hidden; }
+    .slider-inner { display:flex; transition:transform 0.5s ease-in-out; }
+    .slider-item { flex:0 0 25%; padding:0 10px; }
+    .slider-item .produto-card { background:#fff; border:1px solid #ddd; border-radius:8px; padding:16px; text-align:center; }
+    .slider-item img { max-width:100%; border-radius:4px; }
+    .slider-item h3 { font-size:18px; color:#6A2E98; margin:10px 0 5px; }
+    .slider-item p { font-size:14px; margin:5px 0; }
+    .slider-item .price { font-weight:bold; margin-top:8px; }
+    .slider-item .add-cart { background:#F4A72B; color:#fff; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; margin-top:10px; }
+
+    .slider-nav { position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; background:rgba(0,0,0,0.5); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; color:#fff; }
+    .slider-prev { left:10px; }
+    .slider-next { right:10px; }
+
+    /* Modal Styles */
+    .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:1000; }
+    .modal.open { display:flex; }
+    .modal-content { background:#fefefe; padding:20px; border-radius:8px; max-width:500px; width:90%; position:relative; }
+    .close { position:absolute; top:10px; right:15px; font-size:28px; font-weight:bold; cursor:pointer; color:#aaa; }
+    .close:hover { color:#000; }
+    .modal-content input, .modal-content textarea, .modal-content button { width:100%; margin:8px 0; padding:8px; }
+    .primary { background:#F99F38; color:#fff; border:none; padding:10px; border-radius:4px; cursor:pointer; }
+    .primary:hover { background:#EC74A7; }
+
+    /* Cart Modal */
+    #cart-items { max-height:200px; overflow-y:auto; margin-bottom:10px; }
+    .cart-item { display:flex; align-items:center; margin-bottom:10px; }
+    .cart-item img { width:50px; height:50px; object-fit:cover; border-radius:4px; margin-right:10px; }
+    .cart-item span { flex:1; }
+    .cart-item button { background:transparent; border:none; color:#E74C3C; cursor:pointer; }
+
+    /* Admin product list */
+    #admin-produtos { margin-top:20px; max-height:200px; overflow-y:auto; }
+    .admin-item { display:flex; justify-content:space-between; align-items:center; background:#fff; border:1px solid #ddd; border-radius:4px; padding:8px; margin-bottom:8px; }
+    .admin-item span { flex:1; }
+    .admin-item button { margin-left:8px; padding:4px 8px; border:none; border-radius:4px; cursor:pointer; }
+    .admin-edit { background:#F4A72B; color:#fff; }
+    .admin-delete { background:transparent; color:#E74C3C; }
+
+    /* Footer bar */
     footer { text-align:center; font-size:12px; padding:20px; background:#FDE6F2; color:#6A2E98; }
   </style>
 </head>
@@ -47,16 +81,85 @@
   <header>
     <img src="logo-jaciara.png" alt="Jaciara Baby & Kids" class="logo">
     <nav>
-      <a href="passeio.html">Passeio</a>
-      <a href="moveis.html">Móveis</a>
       <a href="kit-berco.html">Kit Berço</a>
       <a href="roupas.html">Roupas</a>
       <a href="alimentacao.html">Alimentação</a>
       <a href="brinquedos.html">Brinquedos</a>
       <a href="ofertas.html">Ofertas</a>
       <a href="#" id="admin-link">Admin</a>
+      <i class="fas fa-shopping-cart cart-icon" id="cart-link" title="Carrinho"></i>
     </nav>
   </header>
+
+  <section class="banner">
+    <h1>Novidades Jaciara Baby & Kids</h1>
+    <p>Venha conferir a nova coleção Pituchinhus!</p>
+    <button>Clica aqui e confira</button>
+  </section>
+
+  <!-- Carrossel de Ícones de Categorias -->
+  <section class="carousel-icons">
+    <div class="carousel-inner" id="carousel-icons-inner">
+      <div class="carousel-item">
+        <div class="icon-circle"><i class="fas fa-box-open"></i></div>
+        <span>Kit Berço</span>
+      </div>
+      <div class="carousel-item">
+        <div class="icon-circle"><i class="fas fa-tshirt"></i></div>
+        <span>Roupas</span>
+      </div>
+      <div class="carousel-item">
+        <div class="icon-circle"><i class="fas fa-utensils"></i></div>
+        <span>Alimentação</span>
+      </div>
+      <div class="carousel-item">
+        <div class="icon-circle"><i class="fas fa-gamepad"></i></div>
+        <span>Brinquedos</span>
+      </div>
+      <div class="carousel-item">
+        <div class="icon-circle"><i class="fas fa-star"></i></div>
+        <span>Ofertas</span>
+      </div>
+      <!-- Clones para loop contínuo -->
+      <div class="carousel-item">
+        <div class="icon-circle"><i class="fas fa-box-open"></i></div>
+        <span>Kit Berço</span>
+      </div>
+      <div class="carousel-item">
+        <div class="icon-circle"><i class="fas fa-tshirt"></i></div>
+        <span>Roupas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Novidades Slider -->
+  <div class="slider-section">
+    <h2 class="section-title">Novidades</h2>
+    <div class="slider-container">
+      <div class="slider-inner" id="novidades-slider">
+        <!-- Exemplo de itens de produto (use dados reais via JS) -->
+      </div>
+    </div>
+    <div class="slider-nav slider-prev" id="prev-novidades"><i class="fas fa-chevron-left"></i></div>
+    <div class="slider-nav slider-next" id="next-novidades"><i class="fas fa-chevron-right"></i></div>
+  </div>
+
+  <!-- Destaques Slider -->
+  <div class="slider-section">
+    <h2 class="section-title">Destaques</h2>
+    <div class="slider-container">
+      <div class="slider-inner" id="destaques-slider">
+        <!-- Exemplo de itens de produto (use dados reais via JS) -->
+      </div>
+    </div>
+    <div class="slider-nav slider-prev" id="prev-destaques"><i class="fas fa-chevron-left"></i></div>
+    <div class="slider-nav slider-next" id="next-destaques"><i class="fas fa-chevron-right"></i></div>
+  </div>
+
+  <footer>
+    Projeto de exemplo para a loja Jaciara Baby &amp; Kids.<br>
+    Todos os direitos reservados.
+  </footer>
 
   <!-- Login Modal -->
   <div id="login-modal" class="modal">
@@ -65,113 +168,289 @@
       <h2>Login Admin</h2>
       <input id="username" placeholder="Usuário">
       <input id="password" type="password" placeholder="Senha">
-      <button id="login-btn">Entrar</button>
+      <button class="primary" id="login-btn">Entrar</button>
     </div>
   </div>
+
   <!-- Admin Panel -->
   <div id="admin-panel" class="modal">
     <div class="modal-content">
       <span class="close" data-close="admin-panel">&times;</span>
       <h2>Painel Admin</h2>
       <div>
-        <h3>Adicionar Categoria</h3>
-        <input id="cat-name" placeholder="Nome da Categoria">
-        <input id="cat-img" placeholder="URL da Imagem">
-        <button id="add-cat">Adicionar Categoria</button>
-      </div>
-      <hr>
-      <div>
-        <h3>Adicionar Produto</h3>
+        <h3>Adicionar / Editar Produto</h3>
+        <input id="prod-id" type="hidden">
         <input id="prod-name" placeholder="Nome do Produto">
         <input id="prod-img" placeholder="URL da Imagem">
         <input id="prod-price" placeholder="Preço (ex: 99.90)">
         <textarea id="prod-desc" rows="3" placeholder="Descrição"></textarea>
-        <select id="prod-cat"></select>
-        <button id="add-prod">Adicionar Produto</button>
+        <button class="primary" id="save-prod">Salvar Produto</button>
+      </div>
+      <div id="admin-produtos">
+        <!-- Lista de produtos para editar/excluir -->
       </div>
     </div>
   </div>
 
-  <section class="banner">
-    <h1>Novidades Jaciara Baby & Kids</h1>
-    <p>Venha conferir a nova coleção Pituchinhus!</p>
-    <button>Clica aqui e confira</button>
-  </section>
-
-  <section class="categorias" id="categorias-container"></section>
-  <section class="produtos" id="produtos-container"></section>
-
-  <footer>
-    Projeto de exemplo para a loja Jaciara Baby & Kids.<br> Todos os direitos reservados.
-  </footer>
+  <!-- Cart Modal -->
+  <div id="cart-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-close="cart-modal">&times;</span>
+      <h2>Carrinho de Compras</h2>
+      <div id="cart-items">
+        <!-- Itens adicionados ao carrinho serão listados aqui -->
+      </div>
+      <button class="primary" id="checkout-btn">Finalizar Compra</button>
+    </div>
+  </div>
 
   <script>
-    const iconMap = {
-      'Passeio': 'fas fa-baby-carriage',
-      'Móveis': 'fas fa-bed',
-      'Kit Berço': 'fas fa-box-open',
-      'Roupas': 'fas fa-tshirt',
-      'Alimentação': 'fas fa-utensils',
-      'Brinquedos': 'fas fa-gamepad'
-    };
-    let categories = JSON.parse(localStorage.getItem('categories')) || [
-      { name:'Passeio' },{ name:'Móveis' },{ name:'Kit Berço' },{ name:'Roupas' },{ name:'Alimentação' },{ name:'Brinquedos' }
-    ];
+    // Carousel auto-scroll icons
+    (function() {
+      const iconsInner = document.getElementById('carousel-icons-inner');
+      if (!iconsInner) return;
+      let offset = 0;
+      function scrollIcons() {
+        offset -= 20;
+        const count = iconsInner.children.length;
+        if (Math.abs(offset) >= (count / 2) * 20) {
+          offset = 0;
+        }
+        iconsInner.style.transform = `translateX(${offset}%)`;
+      }
+      setInterval(scrollIcons, 2000);
+    })();
+
+    // Slider functionality
+    function initSlider(innerId, prevId, nextId) {
+      const inner = document.getElementById(innerId);
+      const btnPrev = document.getElementById(prevId);
+      const btnNext = document.getElementById(nextId);
+      if (!inner || !btnPrev || !btnNext) return;
+      let idx = 0;
+      const items = inner.children;
+      const total = items.length;
+      btnPrev.addEventListener('click', () => {
+        idx = (idx - 1 + total) % total;
+        inner.style.transform = `translateX(-${idx * 25}%)`;
+      });
+      btnNext.addEventListener('click', () => {
+        idx = (idx + 1) % total;
+        inner.style.transform = `translateX(-${idx * 25}%)`;
+      });
+    }
+
+    // Dados produtos no localStorage
     let products = JSON.parse(localStorage.getItem('products')) || [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    function renderCategories() {
-      const container = document.getElementById('categorias-container');
-      container.innerHTML = '';
-      categories.forEach(cat => {
-        const div = document.createElement('div'); div.className = 'categoria';
-        const iconClass = iconMap[cat.name] || 'fas fa-star';
-        div.innerHTML = `<div class="icon-circle"><i class="${iconClass}"></i></div><span>${cat.name}</span>`;
-        container.appendChild(div);
+    // Render sliders dinamicamente
+    function renderSliders() {
+      const novInner = document.getElementById('novidades-slider');
+      const destInner = document.getElementById('destaques-slider');
+      if (!novInner || !destInner) return;
+      novInner.innerHTML = '';
+      destInner.innerHTML = '';
+      products.forEach((p) => {
+        const div = document.createElement('div');
+        div.className = 'slider-item';
+        div.innerHTML = `
+          <div class="produto-card">
+            <img src="${p.img}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <div class="price">R$ ${parseFloat(p.price).toFixed(2)}</div>
+            <button class="add-cart" data-index="${products.indexOf(p)}">Adicionar ao Carrinho</button>
+          </div>
+        `;
+        novInner.appendChild(div.cloneNode(true));
+        destInner.appendChild(div.cloneNode(true));
       });
-      populateCategorySelect();
+      initSlider('novidades-slider', 'prev-novidades', 'next-novidades');
+      initSlider('destaques-slider', 'prev-destaques', 'next-destaques');
+      attachAddCartListeners();
     }
-    function renderProducts() {
-      const container = document.getElementById('produtos-container'); container.innerHTML = '';
-      products.forEach((p,i) => {
-        const card = document.createElement('div'); card.className = 'produto-card';
-        card.innerHTML = `
-          <img src="${p.img}" alt="${p.name}">
-          <h3>${p.name}</h3>
-          <p>${p.desc}</p>
-          <div class="price">R$ ${parseFloat(p.price).toFixed(2)}</div>
-          <button class="delete-btn" data-index="${i}">Excluir</button>`;
-        container.appendChild(card);
-      });
-      document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', () => {
-        products.splice(btn.dataset.index,1); localStorage.setItem('products',JSON.stringify(products)); renderProducts();
-      }));
-    }
-    function populateCategorySelect() {
-      const sel = document.getElementById('prod-cat'); sel.innerHTML='';
-      categories.forEach(cat => sel.innerHTML+=`<option value="${cat.name}">${cat.name}</option>`);
-    }
-    renderCategories(); renderProducts();
 
-    function openModal(id){ document.getElementById(id).classList.add('open'); }
-    function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-    document.getElementById('admin-link').addEventListener('click', e=>{ e.preventDefault(); openModal('login-modal'); });
-    document.querySelectorAll('.close').forEach(btn=>btn.addEventListener('click',()=>closeModal(btn.dataset.close)));
-    document.getElementById('login-btn').addEventListener('click',()=>{
-      const user=document.getElementById('username').value; const pass=document.getElementById('password').value;
-      if(user==='admin'&&pass==='senha123'){ closeModal('login-modal'); openModal('admin-panel'); }
-      else alert('Credenciais inválidas');
+    // Attach listeners to "Add to Cart" buttons
+    function attachAddCartListeners() {
+      document.querySelectorAll('.add-cart').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.index, 10);
+          const product = products[idx];
+          cart.push(product);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          renderCart();
+        });
+      });
+    }
+
+    // Render carrinho
+    function renderCart() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      if (!cartItemsContainer) return;
+      cartItemsContainer.innerHTML = '';
+      cart.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <span>${item.name} - R$ ${parseFloat(item.price).toFixed(2)}</span>
+          <button class="remove-cart" data-index="${i}"><i class="fas fa-trash"></i></button>
+        `;
+        cartItemsContainer.appendChild(div);
+      });
+      document.querySelectorAll('.remove-cart').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.index, 10);
+          cart.splice(idx, 1);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          renderCart();
+        });
+      });
+    }
+
+    // Render produtos na lista interna do admin
+    function renderAdminList() {
+      const adminList = document.getElementById('admin-produtos');
+      if (!adminList) return;
+      adminList.innerHTML = '';
+      products.forEach((p, i) => {
+        const item = document.createElement('div');
+        item.className = 'admin-item';
+        item.innerHTML = `
+          <span>${p.name} - R$ ${parseFloat(p.price).toFixed(2)}</span>
+          <button class="admin-edit" data-index="${i}">Editar</button>
+          <button class="admin-delete" data-index="${i}">Excluir</button>
+        `;
+        adminList.appendChild(item);
+      });
+      // Excluir
+      document.querySelectorAll('.admin-delete').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.index, 10);
+          products.splice(idx, 1);
+          localStorage.setItem('products', JSON.stringify(products));
+          renderSliders();
+          renderAdminList();
+        });
+      });
+      // Editar
+      document.querySelectorAll('.admin-edit').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.index, 10);
+          document.getElementById('prod-id').value = idx;
+          document.getElementById('prod-name').value = products[idx].name;
+          document.getElementById('prod-img').value = products[idx].img;
+          document.getElementById('prod-price').value = products[idx].price;
+          document.getElementById('prod-desc').value = products[idx].desc;
+        });
+      });
+    }
+
+    // Inicial render
+    renderSliders();
+    renderAdminList();
+    renderCart();
+
+    // Funções de modal
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('open');
+    }
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('open');
+    }
+
+    // Abre login ao clicar em Admin
+    const adminLink = document.getElementById('admin-link');
+    if (adminLink) {
+      adminLink.addEventListener('click', e => {
+        e.preventDefault();
+        openModal('login-modal');
+      });
+    }
+
+    // Abre carrinho ao clicar no ícone
+    const cartLink = document.getElementById('cart-link');
+    if (cartLink) {
+      cartLink.addEventListener('click', () => {
+        openModal('cart-modal');
+      });
+    }
+
+    // Fechar modais no “×”
+    document.querySelectorAll('.close').forEach(btn => {
+      btn.addEventListener('click', () => closeModal(btn.dataset.close));
     });
-    document.getElementById('add-cat').addEventListener('click',()=>{
-      const name=document.getElementById('cat-name').value.trim(); if(name){ categories.push({name}); localStorage.setItem('categories',JSON.stringify(categories)); renderCategories(); }
-      else alert('Preencha o nome da categoria');
+
+    // Login simples (usuário fixo)
+    const loginBtn = document.getElementById('login-btn');
+    if (loginBtn) {
+      loginBtn.addEventListener('click', () => {
+        const user = document.getElementById('username')?.value;
+        const pass = document.getElementById('password')?.value;
+        if (user === 'admin' && pass === 'senha123') {
+          closeModal('login-modal');
+          openModal('admin-panel');
+        } else {
+          alert('Credenciais inválidas');
+        }
+      });
+    }
+
+    // Salvar produto (novo ou edição)
+    const saveBtn = document.getElementById('save-prod');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        const idx = document.getElementById('prod-id').value;
+        const name = document.getElementById('prod-name')?.value.trim();
+        const img = document.getElementById('prod-img')?.value.trim();
+        const price = document.getElementById('prod-price')?.value.trim();
+        const desc = document.getElementById('prod-desc')?.value.trim();
+        if (!name || !img || !price || !desc) {
+          alert('Preencha todos os campos');
+          return;
+        }
+        if (idx !== '') {
+          products[idx] = { name, img, price, desc };
+        } else {
+          products.push({ name, img, price, desc });
+        }
+        localStorage.setItem('products', JSON.stringify(products));
+        renderSliders();
+        renderAdminList();
+        closeModal('admin-panel');
+        document.getElementById('prod-id').value = '';
+        document.getElementById('prod-name').value = '';
+        document.getElementById('prod-img').value = '';
+        document.getElementById('prod-price').value = '';
+        document.getElementById('prod-desc').value = '';
+      });
+    }
+
+    // Finalizar compra: esvazia carrinho
+    const checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', () => {
+        if (cart.length === 0) {
+          alert('Carrinho vazio');
+          return;
+        }
+        cart = [];
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+        closeModal('cart-modal');
+        alert('Compra finalizada!');
+      });
+    }
+
+    // Fechar modal clicando fora
+    window.addEventListener('click', e => {
+      if (e.target.classList.contains('modal')) {
+        closeModal(e.target.id);
+      }
     });
-    document.getElementById('add-prod').addEventListener('click',()=>{
-      const n=document.getElementById('prod-name').value.trim(), i=document.getElementById('prod-img').value.trim(),
-            p=document.getElementById('prod-price').value.trim(), d=document.getElementById('prod-desc').value.trim();
-      if(n&&i&&p&&d){ products.push({name:n,img:i,price:p,desc:d}); localStorage.setItem('products',JSON.stringify(products)); renderProducts(); }
-      else alert('Preencha todos os campos de produto');
-    });
-    window.addEventListener('click',e=>{ if(e.target.classList.contains('modal')) closeModal(e.target.id); });
   </script>
 </body>
 </html>
