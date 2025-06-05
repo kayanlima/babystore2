@@ -12,54 +12,92 @@
     body { background:#fffaf5; color:#6A2E98; }
     header { background:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #F99F38; flex-wrap:wrap; }
     .logo { height:50px; }
-    nav { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
-    nav a { text-decoration:none; color:#6A2E98; font-weight:600; font-size:14px; cursor:pointer; }
+    nav { display:flex; gap:12px; overflow-x:auto; white-space:nowrap; align-items:center; }
+    nav a { text-decoration:none; color:#6A2E98; font-weight:600; font-size:14px; cursor:pointer; flex-shrink:0; }
     nav a.active { color:#EF5FA2; }
-    .cart-icon { font-size:20px; color:#6A2E98; cursor:pointer; margin-left:8px; }
+    .cart-icon { font-size:20px; color:#6A2E98; cursor:pointer; margin-left:8px; flex-shrink:0; }
 
-    main { padding:20px; }
-    h1 { font-size:28px; color:#EF5FA2; margin-bottom:12px; text-align:center; }
-    p { font-size:16px; margin-bottom:16px; text-align:center; }
-    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding:20px; }
-    .card { background:#fff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:10px; text-align:center; display:flex; flex-direction:column; justify-content:space-between; height:320px; }
-    .card img { max-width:100%; border-radius:4px; height:150px; object-fit:cover; }
-    .card h3 { font-size:18px; color:#6A2E98; margin:8px 0; }
-    .card p { font-size:14px; color:#505050; margin:4px 0; flex-grow:1; }
-    .price { font-weight:bold; color:#333; margin:8px 0; }
-    .card-buttons { display:flex; justify-content:space-around; margin-top:8px; }
-    .card-buttons button { padding:6px 10px; border:none; border-radius:4px; cursor:pointer; font-size:14px; }
-    .edit-btn { background:#F4A72B; color:#fff; }
-    .cart-btn { background:#6A2E98; color:#fff; }
-    .delete-btn { background:transparent; border:none; color:#E74C3C; cursor:pointer; }
+    /* Banner */
+    .banner { background:linear-gradient(90deg,#F99F38 0%,#EC74A7 100%); text-align:center; padding:40px 20px; }
+    .banner h1 { color:#fff; font-size:32px; margin-bottom:10px; }
+    .banner p { color:#fff; font-size:18px; margin-bottom:20px; }
+    .banner button { background:#F99F38; color:#fff; border:none; padding:10px 20px; border-radius:30px; font-size:16px; cursor:pointer; box-shadow:0 4px 6px rgba(0,0,0,0.1); }
+    .banner button:hover { background:#EC74A7; }
 
+    /* Carousel of category icons */
+    .carousel-icons { background:#D1F0F7; overflow:hidden; padding:15px 0; }
+    .carousel-inner { display:flex; width:max-content; transform: translateX(0); }
+    .carousel-item { flex:0 0 25%; text-align:center; padding:0 10px; }
+    .icon-circle { width:60px; height:60px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin:0 auto 8px; }
+    .icon-circle i { font-size:24px; color:#EC74A7; }
+    .carousel-item span { font-size:13px; color:#6A2E98; display:block; }
+
+    /* Sections Titles */
+    .section-title { font-size:24px; color:#EF5FA2; text-align:center; margin:30px 0 15px; }
+
+    /* Slider Section */
+    .slider-section { position:relative; padding:0 20px 40px; }
+    .slider-container { overflow:hidden; }
+    .slider-inner { display:flex; transition:transform 0.5s ease-in-out; }
+    .slider-item { flex:0 0 33.333%; padding:0 10px; }
+    .produto-card { background:#fff; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.05); padding:12px; text-align:center; display:flex; flex-direction:column; justify-content:space-between; height:320px; }
+    .produto-card img { max-width:100%; border-radius:8px; height:160px; object-fit:cover; margin-bottom:10px; }
+    .produto-card h3 { font-size:18px; color:#6A2E98; margin:8px 0 5px; }
+    .produto-card p { font-size:14px; color:#505050; flex-grow:1; margin-bottom:8px; }
+    .price { font-weight:bold; color:#333; margin-bottom:10px; }
+    .add-cart { background:#F4A72B; color:#fff; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; font-size:14px; }
+    .edit-btn, .delete-btn { background:transparent; border:none; cursor:pointer; font-size:18px; margin:0 4px; }
+    .edit-btn { color:#F4A72B; }
+    .delete-btn { color:#E74C3C; }
+    .btn-group { display:flex; justify-content:center; margin-top:8px; }
+
+    .slider-nav { position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; background:rgba(0,0,0,0.5); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; color:#fff; }
+    .slider-prev { left:10px; }
+    .slider-next { right:10px; }
+
+    /* Modal Styles */
     .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:1000; }
     .modal.open { display:flex; }
-    .modal-content { background:#fff; padding:20px; border-radius:8px; max-width:90%; width:300px; position:relative; }
-    .modal-content h2 { margin-bottom:12px; color:#EF5FA2; font-size:20px; }
-    .modal-content input, .modal-content textarea, .modal-content button { width:100%; margin:6px 0; padding:8px; font-size:14px; }
+    .modal-content { background:#fefefe; padding:20px; border-radius:8px; max-width:90%; width:350px; position:relative; }
+    .modal-content h2 { margin-bottom:12px; color:#EF5FA2; font-size:22px; }
+    .modal-content input, .modal-content textarea, .modal-content select, .modal-content button { width:100%; margin:8px 0; padding:8px; font-size:14px; }
+    select { border:1px solid #ccc; border-radius:4px; }
     .close { position:absolute; top:8px; right:10px; font-size:24px; font-weight:bold; cursor:pointer; color:#aaa; }
     .close:hover { color:#000; }
-    .primary { background:#F99F38; color:#fff; border:none; padding:8px; border-radius:4px; cursor:pointer; }
+    .primary { background:#F99F38; color:#fff; border:none; padding:10px; border-radius:4px; cursor:pointer; font-size:16px; }
     .primary:hover { background:#EC74A7; }
 
-    #cart-items { max-height:150px; overflow-y:auto; margin-bottom:8px; }
+    /* Cart Modal */
+    #cart-items { max-height:200px; overflow-y:auto; margin-bottom:12px; }
     .cart-item { display:flex; align-items:center; margin-bottom:8px; }
     .cart-item img { width:40px; height:40px; object-fit:cover; border-radius:4px; margin-right:8px; }
-    .cart-item span { flex:1; font-size:12px; }
-    .cart-item button { background:transparent; border:none; color:#E74C3C; cursor:pointer; font-size:16px; }
+    .cart-item span { flex:1; font-size:14px; }
+    .cart-item button { background:transparent; border:none; color:#E74C3C; cursor:pointer; font-size:18px; }
 
-    footer { text-align:center; font-size:12px; padding:20px; background:#FDE6F2; color:#6A2E98; }
+    /* Admin product list */
+    #admin-produtos { margin-top:12px; max-height:200px; overflow-y:auto; }
+    .admin-item { display:flex; justify-content:space-between; align-items:center; background:#fff; border:1px solid #ddd; border-radius:4px; padding:8px; margin-bottom:6px; font-size:14px; }
+    .admin-item span { flex:1; }
+    .admin-item button { margin-left:6px; padding:6px 8px; border:none; border-radius:4px; cursor:pointer; font-size:14px; }
+    .admin-edit { background:#F4A72B; color:#fff; }
+    .admin-delete { background:#fff; color:#E74C3C; border:1px solid #E74C3C; }
 
-    @media(max-width:900px) { .grid { grid-template-columns:repeat(2,1fr); } }
+    /* Footer bar */
+    footer { text-align:center; font-size:12px; padding:15px; background:#FDE6F2; color:#6A2E98; }
+
+    /* Responsive adjustments */
+    @media(max-width:900px) { .slider-item { flex:0 0 50%; } }
     @media(max-width:600px) {
       header { flex-direction:column; align-items:flex-start; }
       nav { flex-direction:column; width:100%; }
-      nav a { font-size:12px; margin:4px 0; }
-      h1 { font-size:24px; }
-      p { font-size:14px; }
-      .grid { grid-template-columns:1fr; gap:12px; padding:12px; }
-      .card { height:auto; }
-      .card img { height:120px; }
+      nav a { font-size:12px; margin:6px 0; }
+      .banner h1 { font-size:24px; }
+      .banner p { font-size:14px; }
+      .carousel-item { flex:0 0 33.33%; }
+      .slider-item { flex:0 0 100%; padding:0 4px; }
+      .slider-nav { width:30px; height:30px; }
+      .produto-card { height:auto; }
+      .slider-item img { height:100px; }
     }
   </style>
 </head>
@@ -78,13 +116,12 @@
     </nav>
   </header>
 
-  <main>
-    <h1>Brinquedos</h1>
-    <p>Explore nossa coleção de brinquedos educativos e divertidos, perfeitos para estimular o desenvolvimento do seu filho.</p>
-    <div class="grid" id="products"></div>
+  <main style="background:#fff1f8; padding:40px 20px; text-align:center;">
+    <h1 style="color:#EF5FA2; font-size:32px; margin-bottom:10px;">Brinquedos</h1>
+    <p style="color:#6A2E98; font-size:18px; margin-bottom:30px;">Explore nossa coleção de brinquedos educativos e divertidos.</p>
+    <div class="grid" id="products"" id="products"></div>
   </main>
 
-  <!-- Login Modal -->
   <div id="login-modal" class="modal">
     <div class="modal-content">
       <span class="close" data-close="login-modal">&times;</span>
@@ -95,7 +132,6 @@
     </div>
   </div>
 
-  <!-- Admin Panel Modal -->
   <div id="admin-panel" class="modal">
     <div class="modal-content">
       <span class="close" data-close="admin-panel">&times;</span>
@@ -110,7 +146,6 @@
     </div>
   </div>
 
-  <!-- Cart Modal -->
   <div id="cart-modal" class="modal">
     <div class="modal-content">
       <span class="close" data-close="cart-modal">&times;</span>
@@ -120,31 +155,21 @@
     </div>
   </div>
 
-  <footer>
-    Projeto de exemplo para a loja Jaciara Baby &amp; Kids.<br>
-    Todos os direitos reservados.
-  </footer>
+  <footer>Projeto de exemplo para Jaciara Baby & Kids.</footer>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const apiURL = "https://confirmed-trail-pomegranate.glitch.me/api/produtos";
+    const apiURL = 'https://confirmed-trail-pomegranate.glitch.me/api/produtos';
     let prods = [];
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let isAdmin = false;
 
     function fetchProducts() {
       fetch(apiURL)
-        .then(res => res.json())
+        .then(r => r.json())
         .then(data => {
-          prods = data.map((p, i) => ({
-            name: p.name || p.nome,
-            img: p.img || p.imagem,
-            price: p.price || p.preco,
-            desc: p.desc || '',
-            id: p.id
-          }));
-          render();
-          renderAdminList();
+          prods = data.map(p => ({ id: p.id, name: p.name||p.nome, img: p.img||p.imagem, price: p.price||p.preco, desc: p.desc||'' }));
+          render(); renderAdminList();
         });
     }
 
@@ -152,58 +177,32 @@
       const c = document.getElementById('products'); c.innerHTML = '';
       prods.forEach((p, i) => {
         const card = document.createElement('div'); card.className = 'card';
-        let buttonsHTML = `<button class="cart-btn" data-index="${i}"><i class="fas fa-cart-plus"></i></button>`;
-        if (isAdmin) {
-          buttonsHTML = `
-            <button class="edit-btn" data-index="${i}">✎</button>
-            <button class="delete-btn" data-index="${i}">🗑</button>
-            ${buttonsHTML}
-          `;
-        }
-        card.innerHTML = `
-          <img src="${p.img}" alt="${p.name}">
-          <h3>${p.name}</h3>
-          <p>${p.desc}</p>
-          <div class="price">R$ ${parseFloat(p.price).toFixed(2)}</div>
-          <div class="card-buttons">${buttonsHTML}</div>
-        `;
+        let btns = `<button class="cart-btn" data-index="${i}"><i class="fas fa-cart-plus"></i></button>`;
+        if (isAdmin) btns = `<button class="edit-btn" data-index="${i}">✎</button><button class="delete-btn" data-index="${i}">🗑</button>${btns}`;
+        card.innerHTML = `<img src="${p.img}" alt="${p.name}"><h3>${p.name}</h3><p>${p.desc}</p><div class="price">R$ ${parseFloat(p.price).toFixed(2)}</div><div class="card-buttons">${btns}</div>`;
         c.appendChild(card);
       });
-      attachProductListeners();
+      attachListeners();
     }
 
-    function attachProductListeners() {
-      document.querySelectorAll('.cart-btn').forEach(btn => {
-        btn.onclick = () => {
-          const item = prods[btn.dataset.index];
-          cart.push(item);
-          localStorage.setItem('cart', JSON.stringify(cart));
-          renderCart();
-        };
+    function attachListeners() {
+      document.querySelectorAll('.cart-btn').forEach(btn => btn.onclick = () => {
+        const item = prods[btn.dataset.index]; cart.push(item); localStorage.setItem('cart', JSON.stringify(cart)); renderCart();
       });
       if (isAdmin) {
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-          btn.onclick = () => {
-            const idx = btn.dataset.index;
-            const prod = prods[idx];
-            fetch(`${apiURL}/${prod.id}`, {
-              method: 'DELETE',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ senha: 'senha123' })
-            }).then(() => fetchProducts());
-          };
+        document.querySelectorAll('.delete-btn').forEach(btn => btn.onclick = () => {
+          const prod = prods[btn.dataset.index];
+          fetch(`${apiURL}/${prod.id}`, { method:'DELETE', headers:{'Content-Type':'application/json'}, body: JSON.stringify({senha:'senha123'}) })
+            .then(fetchProducts);
         });
-        document.querySelectorAll('.edit-btn').forEach(btn => {
-          btn.onclick = () => {
-            const idx = btn.dataset.index;
-            const p = prods[idx];
-            document.getElementById('prod-id').value = p.id;
-            document.getElementById('prod-name').value = p.name;
-            document.getElementById('prod-img').value = p.img;
-            document.getElementById('prod-price').value = p.price;
-            document.getElementById('prod-desc').value = p.desc;
-            openModal('admin-panel');
-          };
+        document.querySelectorAll('.edit-btn').forEach(btn => btn.onclick = () => {
+          const p = prods[btn.dataset.index];
+          document.getElementById('prod-id').value = p.id;
+          document.getElementById('prod-name').value = p.name;
+          document.getElementById('prod-img').value = p.img;
+          document.getElementById('prod-price').value = p.price;
+          document.getElementById('prod-desc').value = p.desc;
+          openModal('admin-panel');
         });
       }
     }
@@ -211,114 +210,77 @@
     function renderAdminList() {
       const list = document.getElementById('admin-produtos'); list.innerHTML = '';
       prods.forEach((p, i) => {
-        const item = document.createElement('div'); item.className = 'admin-item';
-        item.innerHTML = `<span>${p.name} - R$ ${parseFloat(p.price).toFixed(2)}</span>
-                          <button class="admin-edit" data-index="${i}">Editar</button>
-                          <button class="admin-delete" data-index="${i}">Excluir</button>`;
-        list.appendChild(item);
+        const div = document.createElement('div'); div.className = 'admin-item';
+        div.innerHTML = `<span>${p.name} - R$ ${parseFloat(p.price).toFixed(2)}</span><button class="admin-edit" data-index="${i}">Editar</button><button class="admin-delete" data-index="${i}">Excluir</button>`;
+        list.appendChild(div);
       });
-      document.querySelectorAll('.admin-delete').forEach(btn => {
-        btn.onclick = () => {
-          const idx = btn.dataset.index;
-          const prod = prods[idx];
-          fetch(`${apiURL}/${prod.id}`, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ senha: 'senha123' })
-          }).then(() => fetchProducts());
-        };
+      document.querySelectorAll('.admin-delete').forEach(btn => btn.onclick = () => {
+        const p = prods[btn.dataset.index]; fetch(`${apiURL}/${p.id}`, { method:'DELETE', headers:{'Content-Type':'application/json'}, body: JSON.stringify({senha:'senha123'}) }).then(fetchProducts);
       });
-      document.querySelectorAll('.admin-edit').forEach(btn => {
-        btn.onclick = () => {
-          const idx = btn.dataset.index;
-          const p = prods[idx];
-          document.getElementById('prod-id').value = p.id;
-          document.getElementById('prod-name').value = p.name;
-          document.getElementById('prod-img').value = p.img;
-          document.getElementById('prod-price').value = p.price;
-          document.getElementById('prod-desc').value = p.desc;
-          openModal('admin-panel');
-        };
+      document.querySelectorAll('.admin-edit').forEach(btn => btn.onclick = () => {
+        const p = prods[btn.dataset.index];
+        document.getElementById('prod-id').value = p.id;
+        document.getElementById('prod-name').value = p.name;
+        document.getElementById('prod-img').value = p.img;
+        document.getElementById('prod-price').value = p.price;
+        document.getElementById('prod-desc').value = p.desc;
+        openModal('admin-panel');
       });
     }
 
     function renderCart() {
       const cont = document.getElementById('cart-items'); cont.innerHTML = '';
-      cart.forEach((item, i) => {
-        const div = document.createElement('div'); div.className = 'cart-item';
-        div.innerHTML = `<img src="${item.img}" alt="${item.name}">
-                         <span>${item.name} - R$ ${parseFloat(item.price).toFixed(2)}</span>
-                         <button class="remove-cart" data-index="${i}">&#x1F5D1;</button>`;
+      cart.forEach((item,i) => {
+        const div = document.createElement('div'); div.className='cart-item';
+        div.innerHTML = `<img src="${item.img}" alt="${item.name}"><span>${item.name} - R$ ${parseFloat(item.price).toFixed(2)}</span><button class="remove-cart" data-index="${i}">&#x1F5D1;</button>`;
         cont.appendChild(div);
       });
-      document.querySelectorAll('.remove-cart').forEach(btn => {
-        btn.onclick = () => {
-          cart.splice(btn.dataset.index, 1);
-          localStorage.setItem('cart', JSON.stringify(cart));
-          renderCart();
-        };
-      });
+      document.querySelectorAll('.remove-cart').forEach(btn => btn.onclick = () => { cart.splice(btn.dataset.index,1); localStorage.setItem('cart',JSON.stringify(cart)); renderCart(); });
     }
 
     function openModal(id) { document.getElementById(id).classList.add('open'); }
     function closeAll() { document.querySelectorAll('.modal').forEach(m => m.classList.remove('open')); }
 
-    document.getElementById('admin-link').onclick = (e) => { e.preventDefault(); openModal('login-modal'); };
-    document.getElementById('cart-link').onclick = () => openModal('cart-modal');
-    document.querySelectorAll('.close').forEach(x => x.onclick = () => closeAll());
+    document.getElementById('admin-link').onclick = e => { e.preventDefault(); openModal('login-modal'); };
+    document.getElementById('cart-link').onclick = () => { renderCart(); openModal('cart-modal'); };
+    document.querySelectorAll('.close').forEach(x => x.onclick = closeAll);
     window.onclick = e => { if (e.target.classList.contains('modal')) closeAll(); };
 
     document.getElementById('login-btn').onclick = () => {
       const u = document.getElementById('username').value;
       const p = document.getElementById('password').value;
-      if (u==='admin' && p==='senha123') {
-        isAdmin=true;
-        closeAll();
-        openModal('admin-panel');
-        render(); renderAdminList();
-      } else alert('Credenciais inválidas');
+      if (u==='admin'&&p==='senha123') { isAdmin=true; closeAll(); openModal('admin-panel'); render(); renderAdminList(); }
+      else alert('Credenciais inválidas');
     };
 
     document.getElementById('save-prod').onclick = () => {
       const id = document.getElementById('prod-id').value;
       const name = document.getElementById('prod-name').value.trim();
       const img = document.getElementById('prod-img').value.trim();
-      const price = document.getElementById('prod-price').value.trim();
+      const price= document.getElementById('prod-price').value.trim();
       const desc = document.getElementById('prod-desc').value.trim();
-      if (name && img && price && desc) {
-        const prodData = { senha: 'senha123', nome: name, imagem: img, preco: price, desc };
-        if (id) {
-          fetch(`${apiURL}/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ senha: 'senha123', produto: { name, img, price, desc } })
-          }).then(() => fetchProducts());
-        } else {
-          fetch(apiURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ senha: 'senha123', produto: { name, img, price, desc } })
-          }).then(() => fetchProducts());
-        }
-        closeAll();
-      } else alert('Preencha todos os campos');
-    };
-
-    document.getElementById('checkout-btn').onclick = () => {
-      if (cart.length === 0) { alert('Carrinho vazio'); return; }
-      let msg = 'Olá, gostaria de realizar o pedido:';
-      cart.forEach(item => { msg += `
-- ${item.name} (R$ ${parseFloat(item.price).toFixed(2)})`; });
-      window.open(`https://wa.me/5583996138889?text=${encodeURIComponent(msg)}`, '_blank');
-      cart = [];
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
+      if (!name||!img||!price||!desc) { alert('Preencha todos os campos'); return; }
+      const bodyData = { senha:'senha123', produto:{ name, img, price, desc } };
+      if (id) {
+        fetch(`${apiURL}/${id}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(bodyData) }).then(fetchProducts);
+      } else {
+        fetch(apiURL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(bodyData) }).then(fetchProducts);
+      }
       closeAll();
     };
 
-    // Inicializa
-    fetchProducts();
-    renderCart();
+    document.getElementById('checkout-btn').onclick = () => {
+      if (!cart.length) { alert('Carrinho vazio'); return; }
+      let msg='Olá, gostaria de pedir:';
+      cart.forEach(item => msg+=`\n- ${item.name} (R$ ${parseFloat(item.price).toFixed(2)})`);
+      window.open(`https://wa.me/5583996138889?text=${encodeURIComponent(msg)}`, '_blank');
+      cart=[]; localStorage.setItem('cart',JSON.stringify(cart)); renderCart(); closeAll();
+    };
+
+    fetchProducts(); renderCart();
   });
 </script>
+</body>
+</html>
+
 
