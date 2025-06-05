@@ -127,9 +127,26 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    let prods = JSON.parse(localStorage.getItem('brinquedosProds')) || [];
+    const apiURL = "https://confirmed-trail-pomegranate.glitch.me/api/produtos";
+    let prods = [];
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let isAdmin = false;
+
+    function fetchProducts() {
+      fetch(apiURL)
+        .then(res => res.json())
+        .then(data => {
+          prods = data.map((p, i) => ({
+            name: p.name || p.nome,
+            img: p.img || p.imagem,
+            price: p.price || p.preco,
+            desc: p.desc || '',
+            id: p.id
+          }));
+          render();
+          renderAdminList();
+        });
+    }
 
     function render() {
       const c = document.getElementById('products'); c.innerHTML = '';
@@ -167,16 +184,20 @@
       if (isAdmin) {
         document.querySelectorAll('.delete-btn').forEach(btn => {
           btn.onclick = () => {
-            prods.splice(btn.dataset.index, 1);
-            localStorage.setItem('brinquedosProds', JSON.stringify(prods));
-            render(); renderAdminList();
+            const idx = btn.dataset.index;
+            const prod = prods[idx];
+            fetch(`${apiURL}/${prod.id}`, {
+              method: 'DELETE',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ senha: 'senha123' })
+            }).then(() => fetchProducts());
           };
         });
         document.querySelectorAll('.edit-btn').forEach(btn => {
           btn.onclick = () => {
             const idx = btn.dataset.index;
             const p = prods[idx];
-            document.getElementById('prod-id').value = idx;
+            document.getElementById('prod-id').value = p.id;
             document.getElementById('prod-name').value = p.name;
             document.getElementById('prod-img').value = p.img;
             document.getElementById('prod-price').value = p.price;
@@ -198,16 +219,20 @@
       });
       document.querySelectorAll('.admin-delete').forEach(btn => {
         btn.onclick = () => {
-          prods.splice(btn.dataset.index, 1);
-          localStorage.setItem('brinquedosProds', JSON.stringify(prods));
-          render(); renderAdminList();
+          const idx = btn.dataset.index;
+          const prod = prods[idx];
+          fetch(`${apiURL}/${prod.id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ senha: 'senha123' })
+          }).then(() => fetchProducts());
         };
       });
       document.querySelectorAll('.admin-edit').forEach(btn => {
         btn.onclick = () => {
           const idx = btn.dataset.index;
           const p = prods[idx];
-          document.getElementById('prod-id').value = idx;
+          document.getElementById('prod-id').value = p.id;
           document.getElementById('prod-name').value = p.name;
           document.getElementById('prod-img').value = p.img;
           document.getElementById('prod-price').value = p.price;
@@ -255,25 +280,27 @@
     };
 
     document.getElementById('save-prod').onclick = () => {
-      const idx = document.getElementById('prod-id').value;
+      const id = document.getElementById('prod-id').value;
       const name = document.getElementById('prod-name').value.trim();
       const img = document.getElementById('prod-img').value.trim();
       const price = document.getElementById('prod-price').value.trim();
       const desc = document.getElementById('prod-desc').value.trim();
       if (name && img && price && desc) {
-        if (idx !== '') {
-          prods[idx] = { name, img, price, desc };
+        const prodData = { senha: 'senha123', nome: name, imagem: img, preco: price, desc };
+        if (id) {
+          fetch(`${apiURL}/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ senha: 'senha123', produto: { name, img, price, desc } })
+          }).then(() => fetchProducts());
         } else {
-          prods.push({ name, img, price, desc });
+          fetch(apiURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ senha: 'senha123', produto: { name, img, price, desc } })
+          }).then(() => fetchProducts());
         }
-        localStorage.setItem('brinquedosProds', JSON.stringify(prods));
         closeAll();
-        render(); renderAdminList();
-        document.getElementById('prod-id').value = '';
-        document.getElementById('prod-name').value = '';
-        document.getElementById('prod-img').value = '';
-        document.getElementById('prod-price').value = '';
-        document.getElementById('prod-desc').value = '';
       } else alert('Preencha todos os campos');
     };
 
@@ -282,16 +309,16 @@
       let msg = 'Olá, gostaria de realizar o pedido:';
       cart.forEach(item => { msg += `
 - ${item.name} (R$ ${parseFloat(item.price).toFixed(2)})`; });
-      const encoded = encodeURIComponent(msg);
-      const waNumber = '5583996138889';
-      window.open(`https://wa.me/${waNumber}?text=${encoded}`, '_blank');
+      window.open(`https://wa.me/5583996138889?text=${encodeURIComponent(msg)}`, '_blank');
       cart = [];
       localStorage.setItem('cart', JSON.stringify(cart));
       renderCart();
       closeAll();
     };
 
-    // Inicializa telas
-    render(); renderAdminList(); renderCart();
+    // Inicializa
+    fetchProducts();
+    renderCart();
   });
 </script>
+
