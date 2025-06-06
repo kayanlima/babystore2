@@ -1,4 +1,4 @@
-<!-- arquivo: alimentaçao.html -->
+<!-- arquivo: alimentacao.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -140,7 +140,7 @@
     let isAdmin = false;
 
     function fetchProducts() {
-      fetch(apiURL)
+      fetch(apiURL + '?section=alimentacao')
         .then(r => r.json())
         .then(data => {
           prods = data.map(p => ({ id: p.id, name: p.name||p.nome, img: p.img||p.imagem, price: p.price||p.preco, desc: p.desc||'' }));
@@ -257,4 +257,3 @@
 </script>
 </body>
 </html>
-
