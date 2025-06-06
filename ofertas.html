@@ -1,33 +1,259 @@
+<!-- arquivo: ofertas.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ofertas - Jaciara Baby & Kids</title>
+  <title>Brinquedos - Jaciara Baby & Kids</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    body {
-      font-family: 'Fredoka', sans-serif;
-      background-color: #fffaf5;
-      color: #7B3FA2;
-      padding: 20px;
-    }
-    h1 {
-      font-size: 28px;
-      color: #EF5FA2;
-    }
-    p {
-      font-size: 16px;
-    }
-    a {
-      color: #F4A72B;
-      text-decoration: none;
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Fredoka',sans-serif; }
+    body { background:#fffaf5; color:#6A2E98; }
+    header { background:#fff; padding:10px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #F99F38; flex-wrap:wrap; }
+    .logo { height:50px; }
+    nav { display:flex; gap:12px; overflow-x:auto; white-space:nowrap; align-items:center; }
+    nav a { text-decoration:none; color:#6A2E98; font-weight:600; font-size:14px; cursor:pointer; flex-shrink:0; }
+    nav a.active { color:#EF5FA2; }
+    .cart-icon { font-size:20px; color:#6A2E98; cursor:pointer; margin-left:8px; flex-shrink:0; }
+
+    /* Titles & Main */
+    main { background:#fff1f8; padding:40px 20px; text-align:center; }
+    main h1 { color:#EF5FA2; font-size:32px; margin-bottom:10px; }
+    main p { color:#6A2E98; font-size:18px; margin-bottom:30px; }
+
+    /* Grid 4 columns */
+    .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; padding:0 20px 20px; }
+    .card { background:#fff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:10px; text-align:center; display:flex; flex-direction:column; justify-content:space-between; height:320px; }
+    .card img { width:100%; border-radius:4px; height:280px; object-fit:cover; margin-bottom:8px; }
+    .card h3 { font-size:18px; color:#6A2E98; margin:8px 0; }
+    .card p { font-size:14px; color:#505050; margin:4px 0; flex-grow:1; }
+    .price { font-weight:bold; color:#333; margin:8px 0; }
+    .card-buttons { display:flex; justify-content:space-around; margin-top:8px; }
+    .edit-btn { background:#F4A72B; color:#fff; }
+    .cart-btn { background:#6A2E98; color:#fff; }
+    .delete-btn { background:transparent; border:none; color:#E74C3C; cursor:pointer; }
+
+    /* Modal Styles */
+    .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:1000; }
+    .modal.open { display:flex; }
+    .modal-content { background:#fff; padding:20px; border-radius:8px; max-width:90%; width:350px; position:relative; }
+    .modal-content h2 { margin-bottom:12px; color:#EF5FA2; font-size:22px; }
+    .modal-content input, .modal-content textarea, .modal-content button { width:100%; margin:8px 0; padding:8px; font-size:14px; }
+    .close { position:absolute; top:8px; right:10px; font-size:24px; font-weight:bold; cursor:pointer; color:#aaa; }
+    .close:hover { color:#000; }
+    .primary { background:#F99F38; color:#fff; border:none; padding:10px; border-radius:4px; cursor:pointer; font-size:16px; }
+    .primary:hover { background:#EC74A7; }
+
+    /* Cart Modal */
+    #cart-items { max-height:200px; overflow-y:auto; margin-bottom:12px; }
+    .cart-item { display:flex; align-items:center; margin-bottom:8px; }
+    .cart-item img { width:40px; height:40px; object-fit:cover; border-radius:4px; margin-right:8px; }
+    .cart-item span { flex:1; font-size:14px; }
+    .cart-item button { background:transparent; border:none; color:#E74C3C; cursor:pointer; font-size:18px; }
+
+    /* Admin product list */
+    #admin-produtos { margin-top:12px; max-height:200px; overflow-y:auto; }
+    .admin-item { display:flex; justify-content:space-between; align-items:center; background:#fff; border:1px solid #ddd; border-radius:4px; padding:8px; margin-bottom:6px; font-size:14px; }
+    .admin-item span { flex:1; }
+    .admin-item button { margin-left:6px; padding:6px 8px; border:none; border-radius:4px; cursor:pointer; font-size:14px; }
+    .admin-edit { background:#F4A72B; color:#fff; }
+    .admin-delete { background:#fff; color:#E74C3C; border:1px solid #E74C3C; }
+
+    /* Footer bar */
+    footer { text-align:center; font-size:12px; padding:15px; background:#FDE6F2; color:#6A2E98; }
+
+    /* Responsive adjustments */
+    @media(max-width:900px) { .grid { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:600px) {
+      header { flex-direction:column; align-items:flex-start; }
+      nav { flex-direction:column; width:100%; }
+      nav a { font-size:12px; margin:6px 0; }
+      main h1 { font-size:24px; }
+      main p { font-size:16px; }
+      .grid { grid-template-columns:1fr; gap:12px; padding:12px; }
+      .card img { height:200px; }
     }
   </style>
 </head>
 <body>
-  <h1>Ofertas Especiais</h1>
-  <p>Aproveite nossos descontos exclusivos em produtos selecionados por tempo limitado.</p>
-  <p><a href="index.html">← Voltar para a página inicial</a></p>
+  <header>
+    <img src="logo-jaciara.png" alt="Jaciara Baby & Kids" class="logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="kit-berco.html">Kit Berço</a>
+      <a href="roupas.html">Roupas</a>
+      <a href="alimentacao.html">Alimentação</a>
+      <a href="brinquedos.html" class="active">Brinquedos</a>
+      <a href="ofertas.html">Ofertas</a>
+      <a href="#" id="admin-link">Admin</a>
+      <i class="fas fa-shopping-cart cart-icon" id="cart-link" title="Carrinho"></i>
+    </nav>
+  </header>
+
+  <main style="background:#fff1f8; padding:40px 20px; text-align:center;">
+    <h1 style="color:#EF5FA2; font-size:32px; margin-bottom:10px;">Ofertas</h1>
+    <p style="color:#6A2E98; font-size:18px; margin-bottom:30px;">Aproveite nossas promoções especiais e descontos exclusivos em itens selecionados!</p>
+    <div class="grid" id="products"" id="products"" id="products"></div>
+  </main>
+
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-close="login-modal">&times;</span>
+      <h2>Login Admin</h2>
+      <input id="username" placeholder="Usuário">
+      <input id="password" type="password" placeholder="Senha">
+      <button class="primary" id="login-btn">Entrar</button>
+    </div>
+  </div>
+
+  <div id="admin-panel" class="modal">
+    <div class="modal-content">
+      <span class="close" data-close="admin-panel">&times;</span>
+      <h2>Painel Admin</h2>
+      <input id="prod-id" type="hidden">
+      <input id="prod-name" placeholder="Nome do Produto">
+      <input id="prod-img" placeholder="URL da Imagem">
+      <input id="prod-price" placeholder="Preço">
+      <textarea id="prod-desc" rows="3" placeholder="Descrição"></textarea>
+      <button class="primary" id="save-prod">Salvar Produto</button>
+      <div id="admin-produtos" style="margin-top:10px; max-height:150px; overflow-y:auto;"></div>
+    </div>
+  </div>
+
+  <div id="cart-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-close="cart-modal">&times;</span>
+      <h2>Carrinho de Compras</h2>
+      <div id="cart-items"></div>
+      <button class="primary" id="checkout-btn">Finalizar Compra</button>
+    </div>
+  </div>
+
+  <footer>Projeto de exemplo para Jaciara Baby & Kids.</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const apiURL = 'https://confirmed-trail-pomegranate.glitch.me/api/produtos';
+    let prods = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let isAdmin = false;
+
+    function fetchProducts() {
+      fetch(apiURL)
+        .then(r => r.json())
+        .then(data => {
+          prods = data.map(p => ({ id: p.id, name: p.name||p.nome, img: p.img||p.imagem, price: p.price||p.preco, desc: p.desc||'' }));
+          render(); renderAdminList();
+        });
+    }
+
+    function render() {
+      const c = document.getElementById('products'); c.innerHTML = '';
+      prods.forEach((p, i) => {
+        const card = document.createElement('div'); card.className = 'card';
+        let btns = `<button class="cart-btn" data-index="${i}"><i class="fas fa-cart-plus"></i></button>`;
+        if (isAdmin) btns = `<button class="edit-btn" data-index="${i}">✎</button><button class="delete-btn" data-index="${i}">🗑</button>${btns}`;
+        card.innerHTML = `<img src="${p.img}" alt="${p.name}"><h3>${p.name}</h3><p>${p.desc}</p><div class="price">R$ ${parseFloat(p.price).toFixed(2)}</div><div class="card-buttons">${btns}</div>`;
+        c.appendChild(card);
+      });
+      attachListeners();
+    }
+
+    function attachListeners() {
+      document.querySelectorAll('.cart-btn').forEach(btn => btn.onclick = () => {
+        const item = prods[btn.dataset.index]; cart.push(item); localStorage.setItem('cart', JSON.stringify(cart)); renderCart();
+      });
+      if (isAdmin) {
+        document.querySelectorAll('.delete-btn').forEach(btn => btn.onclick = () => {
+          const prod = prods[btn.dataset.index];
+          fetch(`${apiURL}/${prod.id}`, { method:'DELETE', headers:{'Content-Type':'application/json'}, body: JSON.stringify({senha:'senha123'}) })
+            .then(fetchProducts);
+        });
+        document.querySelectorAll('.edit-btn').forEach(btn => btn.onclick = () => {
+          const p = prods[btn.dataset.index];
+          document.getElementById('prod-id').value = p.id;
+          document.getElementById('prod-name').value = p.name;
+          document.getElementById('prod-img').value = p.img;
+          document.getElementById('prod-price').value = p.price;
+          document.getElementById('prod-desc').value = p.desc;
+          openModal('admin-panel');
+        });
+      }
+    }
+
+    function renderAdminList() {
+      const list = document.getElementById('admin-produtos'); list.innerHTML = '';
+      prods.forEach((p, i) => {
+        const div = document.createElement('div'); div.className = 'admin-item';
+        div.innerHTML = `<span>${p.name} - R$ ${parseFloat(p.price).toFixed(2)}</span><button class="admin-edit" data-index="${i}">Editar</button><button class="admin-delete" data-index="${i}">Excluir</button>`;
+        list.appendChild(div);
+      });
+      document.querySelectorAll('.admin-delete').forEach(btn => btn.onclick = () => {
+        const p = prods[btn.dataset.index]; fetch(`${apiURL}/${p.id}`, { method:'DELETE', headers:{'Content-Type':'application/json'}, body: JSON.stringify({senha:'senha123'}) }).then(fetchProducts);
+      });
+      document.querySelectorAll('.admin-edit').forEach(btn => btn.onclick = () => {
+        const p = prods[btn.dataset.index];
+        document.getElementById('prod-id').value = p.id;
+        document.getElementById('prod-name').value = p.name;
+        document.getElementById('prod-img').value = p.img;
+        document.getElementById('prod-price').value = p.price;
+        document.getElementById('prod-desc').value = p.desc;
+        openModal('admin-panel');
+      });
+    }
+
+    function renderCart() {
+      const cont = document.getElementById('cart-items'); cont.innerHTML = '';
+      cart.forEach((item,i) => {
+        const div = document.createElement('div'); div.className='cart-item';
+        div.innerHTML = `<img src="${item.img}" alt="${item.name}"><span>${item.name} - R$ ${parseFloat(item.price).toFixed(2)}</span><button class="remove-cart" data-index="${i}">&#x1F5D1;</button>`;
+        cont.appendChild(div);
+      });
+      document.querySelectorAll('.remove-cart').forEach(btn => btn.onclick = () => { cart.splice(btn.dataset.index,1); localStorage.setItem('cart',JSON.stringify(cart)); renderCart(); });
+    }
+
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeAll() { document.querySelectorAll('.modal').forEach(m => m.classList.remove('open')); }
+
+    document.getElementById('admin-link').onclick = e => { e.preventDefault(); openModal('login-modal'); };
+    document.getElementById('cart-link').onclick = () => { renderCart(); openModal('cart-modal'); };
+    document.querySelectorAll('.close').forEach(x => x.onclick = closeAll);
+    window.onclick = e => { if (e.target.classList.contains('modal')) closeAll(); };
+
+    document.getElementById('login-btn').onclick = () => {
+      const u = document.getElementById('username').value;
+      const p = document.getElementById('password').value;
+      if (u==='admin'&&p==='senha123') { isAdmin=true; closeAll(); openModal('admin-panel'); render(); renderAdminList(); }
+      else alert('Credenciais inválidas');
+    };
+
+    document.getElementById('save-prod').onclick = () => {
+      const id = document.getElementById('prod-id').value;
+      const name = document.getElementById('prod-name').value.trim();
+      const img = document.getElementById('prod-img').value.trim();
+      const price= document.getElementById('prod-price').value.trim();
+      const desc = document.getElementById('prod-desc').value.trim();
+      if (!name||!img||!price||!desc) { alert('Preencha todos os campos'); return; }
+      const bodyData = { senha:'senha123', produto:{ name, img, price, desc } };
+      if (id) {
+        fetch(`${apiURL}/${id}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(bodyData) }).then(fetchProducts);
+      } else {
+        fetch(apiURL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(bodyData) }).then(fetchProducts);
+      }
+      closeAll();
+    };
+
+    document.getElementById('checkout-btn').onclick = () => {
+      if (!cart.length) { alert('Carrinho vazio'); return; }
+      let msg='Olá, gostaria de pedir:';
+      cart.forEach(item => msg+=`\n- ${item.name} (R$ ${parseFloat(item.price).toFixed(2)})`);
+      window.open(`https://wa.me/5583996138889?text=${encodeURIComponent(msg)}`, '_blank');
+      cart=[]; localStorage.setItem('cart',JSON.stringify(cart)); renderCart(); closeAll();
+    };
+
+    fetchProducts(); renderCart();
+  });
+</script>
 </body>
 </html>
